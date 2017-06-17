@@ -6,7 +6,7 @@ from setup import basedir
 class BaseConfig(object):
     SECRET_KEY = "SO_SECURE"
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'postgresql://postgres:password@localhost/postgres')
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
