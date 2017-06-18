@@ -8,16 +8,21 @@ import MenuItem from 'material-ui/MenuItem';
 
 
 const style = {
-    marginTop: 50,
-    paddingBottom: 50,
-    paddingTop: 25,
-    width: '100%',
-    textAlign: 'center',
-    display: 'inline-block',
+    formBody: {
+        marginTop: 50,
+        paddingBottom: 50,
+        paddingTop: 25,
+        width: '100%',
+        textAlign: 'center',
+        display: 'inline-block',
+    },
     formTitle: { 
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
+    },
+    error: {
+        color: "red"
     }
 };
 
@@ -59,24 +64,24 @@ export class ToDoForm extends React.Component {
 
     _handleKeyPress(e) {
         if (e.key === 'Enter') {
-            if (!this.state.name || !this.state.description) {
-                this.setState({errorText: 'Name and description must not be empty'})
-            } else {
-                this.setState({errorText: ''})
-                this.submit(e);
-            }
+            this.submit(e);
         }
     }
 
     submit(e) {
         e.preventDefault();
-        this.props.upsertToDo(this.state.id, this.state.name, this.state.description, this.state.list.id);
+        if (this.state.name === '' || this.state.description === '') {
+            this.setState({errorText: 'Name and description must not be empty'})
+        } else {
+            this.setState({errorText: ''})
+            this.props.upsertToDo(this.state.id, this.state.name, this.state.description, this.state.list.id);
+        }
     }
 
     render() {
         return (
             <div className="col-md-12" onKeyPress={(e) => this._handleKeyPress(e)}>
-                <Paper style={style}>
+                <Paper style={style.formBody}>
                     <div className="text-center">
                         <div style={style.formTitle}>
                             <h3>Add a new</h3>
@@ -104,13 +109,13 @@ export class ToDoForm extends React.Component {
                             />
                         </div>
                         <div className="col-md-12">
+                            <small style={style.error}>{this.state.errorText}</small>
                         </div>
                         <RaisedButton
                             style={{ marginTop: 50 }}
                             label="Submit"
                             onClick={(e) => this.submit(e)}
                         />
-                        <div>{this.state.errorText}</div>
                     </div>
                 </Paper>
 

@@ -70,7 +70,7 @@ export function loginUser(email, password) {
             .then(response => {
                 try {
                     dispatch(loginUserSuccess(response.token));
-                    browserHistory.push('/main');
+                    browserHistory.push('/todo');
                 } catch (e) {
                     alert(e);
                     dispatch(loginUserFailure({
