@@ -13,7 +13,7 @@ class ToDoListModel(db.Model):
         self.name = name
 
     def json(self):
-        return {'name': self.name, 'todos': [item.json() for item in self.todos.all()]}
+        return {'id': self.id, 'name': self.name, 'todos': [item.json() for item in self.todos.all()]}
 
     @classmethod
     def find_by_name(cls, name):

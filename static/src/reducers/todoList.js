@@ -2,7 +2,7 @@ import { RECEIVE_TODO_LISTS, FETCH_TODO_LISTS } from '../constants';
 import { createReducer } from '../utils/misc';
 
 const initialState = {
-    data: null,
+    data: [],
     isFetching: false,
     loaded: false,
 };

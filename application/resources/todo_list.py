@@ -6,7 +6,7 @@ class ToDoList(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('name', 
         required=True,
-        help="ToDo needs a name!"
+        help="To Do list needs a name!"
     )
 
     def get(self, name):
@@ -16,14 +16,16 @@ class ToDoList(Resource):
             return {'data': ToDoListModel.find_by_name(name)}
 
     def post(self, name):
-        if ToDoListModel.find_by_name(name):
-            return {'message': 'ToDoList {} already exists'.format(name)}, 400
+        data = ToDoList.parser.parse_args()
 
-        todo_list = ToDoListModel(name)
+        if ToDoListModel.find_by_name(data.name):
+            return {'message': 'ToDoList {} already exists'.format(data.name)}, 400
+
+        todo_list = ToDoListModel(data.name)
         try:
             todo_list.save_to_db()
         except:
-            return {'message': 'Saving list:{} error.'.format(name)}, 500
+            return {'message': 'Saving list:{} error.'.format(data.name)}, 500
 
         return todo_list.json(), 201
 

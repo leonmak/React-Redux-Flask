@@ -12,9 +12,8 @@ class ToDo(Resource):
         help="ToDo needs a description!"
     )
     parser.add_argument('list_id', 
-        type=int,
         required=True,
-        help="ToDo needs a list id!"
+        help="ToDo needs a list name!"
     )
 
     def get(self, _id):
