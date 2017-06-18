@@ -42,3 +42,24 @@ export function has_github_token(token) {
 export function data_about_user(token) {
     return axios.get('api/user', tokenConfig(token));
 }
+
+export function todos_data() {
+    return axios.get('api/todos/all');
+}
+
+export function todo_lists_data() {
+    return axios.get('api/todos/lists')
+}
+
+export function todo_upsert(id, name, description, listId) {
+    return axios.put(`api/todo/${id}`, {
+        id,
+        name,
+        description,
+        'list_id': listId
+    });
+}
+
+export function todo_delete(id) {
+    return axios.delete(`api/todo/${id}`);
+}

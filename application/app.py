@@ -1,9 +1,17 @@
 from flask import request, render_template, jsonify, url_for, redirect, g
-from .models import User
+from application.models.user import User
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from .utils.auth import generate_token, requires_auth, verify_token
 
+from flask_restful import Api
+from application.resources.todo import ToDo
+from application.resources.todo_list import ToDoList
+
+api = Api(app)
+
+api.add_resource(ToDo, '/api/todo/<string:_id>')
+api.add_resource(ToDoList, '/api/todos/<string:name>')
 
 @app.route('/', methods=['GET'])
 def index():

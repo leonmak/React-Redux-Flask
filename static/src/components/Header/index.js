@@ -78,8 +78,8 @@ export class Header extends Component {
                             </div>
                             :
                             <div>
-                                <MenuItem onClick={() => this.dispatchNewRoute('/analytics')}>
-                                    Analytics
+                                <MenuItem onClick={() => this.dispatchNewRoute('/todo')}>
+                                    To Do List
                                 </MenuItem>
                                 <Divider />
 
